@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c0bb1845315be45881be33d26d4fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ip: 192.168.8.1
+  ip: 192.168.8.198
   port: 20809
   myId: 0
 --- !u!4 &1103624775
@@ -587,7 +587,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1225269330}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1768180193}
+        m_TargetAssemblyTypeName: UImanager, Assembly-CSharp
+        m_MethodName: ConnectToServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1225269330
 MonoBehaviour:
   m_ObjectHideFlags: 0

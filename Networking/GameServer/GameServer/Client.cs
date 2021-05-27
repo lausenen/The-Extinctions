@@ -18,6 +18,7 @@ namespace GameServer
         public class TCP
         {
             public TcpClient socket;
+            
             private readonly int id;
             private NetworkStream stream;
             private byte[] receiveBuffer;

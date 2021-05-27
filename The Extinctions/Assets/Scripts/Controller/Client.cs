@@ -9,7 +9,7 @@ public class Client : MonoBehaviour
 {
     public static Client instance;
     public static int dataBufferSize = 4096;
-    public string ip = "192.168.8.1";
+    public string ip = "127.0.0.1";
     public int port = 20809;
     public int myId = 0;
     public TCP tcp;
@@ -29,11 +29,13 @@ public class Client : MonoBehaviour
 
     private void Start()
     {
+        print("Starting TCP Connection");
         tcp = new TCP();
     }
 
     public void ConnectToServer()
     {
+        print("Connecting To Server");
         tcp.Connect();
     }
 
@@ -56,6 +58,7 @@ public class Client : MonoBehaviour
 
         private void ConnectCallback(IAsyncResult _result)
         {
+            print("Callback recieved");
             socket.EndConnect(_result);
             if (!socket.Connected)
             {

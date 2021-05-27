@@ -11,15 +11,15 @@ namespace GameServer
     {
         public static int MaxPlayers { get; private set; }
         public static int Port { get; private set; }
-        public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
+        public readonly static Dictionary<int, Client> clients = new();
         private static TcpListener _tcpListener;
 
         public static void Start(int _maxPlayers, int _port)
         {
             
             Console.WriteLine("Starting server...");
-            InitializeServerData();
             MaxPlayers = _maxPlayers;
+            InitializeServerData();
             Port = _port;
 
             _tcpListener = new TcpListener(IPAddress.Any, Port);
