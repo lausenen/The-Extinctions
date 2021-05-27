@@ -14,10 +14,11 @@ namespace GameServer
         public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
         private static TcpListener _tcpListener;
 
-        public void Start(int _maxPlayers, int _port)
+        public static void Start(int _maxPlayers, int _port)
         {
             
             Console.WriteLine("Starting server...");
+            InitializeServerData();
             MaxPlayers = _maxPlayers;
             Port = _port;
 
@@ -32,6 +33,7 @@ namespace GameServer
         {
             TcpClient _client = _tcpListener.EndAcceptTcpClient(_result);
             _tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
+            Console.WriteLine($"Incoming connection from {_client.Client.RemoteEndPoint}...");
 
             for (int i = 1; i <= MaxPlayers; i++)
             {
