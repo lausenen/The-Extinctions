@@ -75,7 +75,7 @@ namespace GameServer
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error recieving TCP data {e}");
+                    Console.WriteLine($"Error receiving TCP data {e}");
                     
                 }
             } 
