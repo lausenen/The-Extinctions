@@ -175,7 +175,8 @@ public class Client : MonoBehaviour
 
         public void Connect(int _localPort)
         {
-            socket = new UdpClient();
+            socket = new UdpClient(_localPort);
+            socket.Connect(EndPoint);
             socket.BeginReceive(ReceiveCallback, null);
 
             using (Packet _packet = new Packet())
@@ -246,7 +247,8 @@ public class Client : MonoBehaviour
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
-            {(int) ServerPackets.welcome, ClientHandle.Welcome}
+            {(int) ServerPackets.welcome, ClientHandle.Welcome},
+            {(int) ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer},
         };
         Debug.Log("Initialized packets.");
     }
