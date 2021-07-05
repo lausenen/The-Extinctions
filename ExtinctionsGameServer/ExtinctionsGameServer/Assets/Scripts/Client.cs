@@ -1,13 +1,13 @@
-﻿using System;
-using System.ComponentModel.Design.Serialization;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
 using System.Net;
 using System.Net.Sockets;
-using System.Numerics;
 
-namespace GameServer
-{
-    public class Client
-    {
+
+public class Client {
+    
         public static int dataBufferSize = 4096;
         public int id;
         public TCP tcp;
@@ -61,7 +61,7 @@ namespace GameServer
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error sending data to player {id} via TCP: {e}");
+                    Debug.Log($"Error sending data to player {id} via TCP: {e}");
                     throw;
                 }
             }
@@ -85,7 +85,7 @@ namespace GameServer
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error receiving TCP data {e}");
+                    Debug.Log($"Error receiving TCP data {e}");
                     Server.clients[id].Disconnect();
                     
                 }
@@ -188,7 +188,8 @@ namespace GameServer
 
         public void SendIntoGame(string _playerName)
         {
-            player = new Player(id, _playerName, new Vector3(0, 0, 0));
+            player = NetworkManager.instance.InstantiatePlayer();
+            player.Initialize(id, _playerName);
 
             foreach (Client _client in Server.clients.Values)
             {
@@ -212,13 +213,11 @@ namespace GameServer
 
         private void Disconnect()
         {
-            Console.WriteLine($"{tcp.socket.Client.RemoteEndPoint} has disconnected.");
-
+            Debug.Log($"{tcp.socket.Client.RemoteEndPoint} has disconnected.");
+            UnityEngine.Object.Destroy(player.gameObject);
             player = null;
             tcp.Disconnect();
             udp.Disconnect();
         }
-      
-    }
-    
-    }
+        
+}
