@@ -11,7 +11,8 @@ using UnityEngine;
         welcome = 1,
         spawnPlayer,
         playerPosition,
-        playerRotation
+        playerRotation,
+        playerDisconnected,
     }
 
     /// <summary>Sent from client to server.</summary>

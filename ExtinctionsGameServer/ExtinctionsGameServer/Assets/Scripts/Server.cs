@@ -89,7 +89,7 @@ public class Server
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error receiving UDP data {e}");
+                Console.WriteLine($"Error receiving UDP data {e}, or client quit");
             }
         }
 
@@ -120,5 +120,11 @@ public class Server
                 {(int) ClientPackets.playerMovement, ServerHandle.PlayerMovement},
             };
             Console.WriteLine("Initialized packets.");
+        }
+
+        public static void Stop()
+        {
+            _tcpListener.Stop();
+            udpListener.Close();
         }
     }

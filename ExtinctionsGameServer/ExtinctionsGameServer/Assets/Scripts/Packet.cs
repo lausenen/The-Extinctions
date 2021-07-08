@@ -10,7 +10,8 @@ using System.Text;
         welcome = 1,
         spawnPlayer,
         playerPosition,
-        playerRotation
+        playerRotation,
+        playerDisconnected
     }
 
     /// <summary>Sent from client to server.</summary>

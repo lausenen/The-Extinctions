@@ -101,5 +101,14 @@ public class ServerSend {
                 SendUDPDataToAll(_player.id,_packet);
             }
         }
+
+        public static void PlayerDisconnected(int _playerId)
+        {
+            using (Packet _packet = new Packet((int) ServerPackets.playerDisconnected))
+            {
+                _packet.Write(_playerId);
+                SendTCPDataToAll(_packet);
+            }
+        }
         #endregion
 }

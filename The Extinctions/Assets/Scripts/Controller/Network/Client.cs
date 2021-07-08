@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class Client : MonoBehaviour
 {
+    
+    
     public static Client instance;
     public static int dataBufferSize = 4096;
     public string ip = "127.0.0.1";
@@ -15,10 +18,11 @@ public class Client : MonoBehaviour
     public TCP tcp;
     public UDP udp;
     private bool isConnected = false;
-
+    
     public delegate void PacketHandler(Packet _packet);
 
     private static Dictionary<int, PacketHandler> packetHandlers;
+    
 
     private void Awake()
     {
@@ -32,7 +36,6 @@ public class Client : MonoBehaviour
             Destroy(this);
         }
     }
-
     private void Start()
     {
         print("Starting TCP Connection");
@@ -278,6 +281,7 @@ public class Client : MonoBehaviour
             {(int) ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer},
             {(int) ServerPackets.playerPosition, ClientHandle.PlayerPosition},
             {(int) ServerPackets.playerRotation, ClientHandle.PlayerRotation},
+            {(int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected}
         };
         Debug.Log("Initialized packets.");
     }
